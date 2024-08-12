@@ -1359,7 +1359,9 @@ WSASendMsg_fp_t get_WSASendMsg_fp() {
 } // extern "C"
 
 namespace co {
-
+#if !defined(PCHAR)
+#define PCHAR const char *
+#endif
 inline void detour_attach(PVOID* ppbReal, PVOID pbMine, PCHAR psz) {
     LONG l = DetourAttach(ppbReal, pbMine);
     CHECK_EQ(l, 0) << "detour attach failed: " << psz;
