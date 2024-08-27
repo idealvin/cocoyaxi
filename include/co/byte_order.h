@@ -5,6 +5,10 @@
 
 #ifdef _MSC_VER
 #pragma comment(lib, "Ws2_32.lib")
+#if _WIN32_WINNT < _WIN32_WINNT_WIN8
+  #define htonll(x) _byteswap_uint64(x)
+  #define ntohll(x) _byteswap_uint64(x)
+#endif
 #else /* mingw */
 #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
   #define htonll(x) __builtin_bswap64(x)
